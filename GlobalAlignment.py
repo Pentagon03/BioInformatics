@@ -117,11 +117,12 @@ def find_score(alignmentA:str, alignmentB:str, info = our_info) -> int:
         else:
             score += gap
     return score
-
 if __name__ == "__main__":
+    # A = input()
+    # B = input()
     A = "GCATGCG"
     B = "GATTACA"
-    alignmentA, alignmentB = get_alignment(A,B)
+    alignmentA, alignmentB = get_alignment(A,B,[1,-1,-1])
     print(alignmentA)
     print(alignmentB)
     diff = ""
