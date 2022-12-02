@@ -3,14 +3,14 @@
 
 # match, mismatch, gap score (penalty)
 our_info = [1,-1,-1]
-match, mismatch, gap = our_info 
+# match, mismatch, gap = our_info 
 
 # Basically global alignment
 # Note thatt there can be different alginments with same score
 # get alginment of A and B in linear space
 def get_alignment(A:str, B:str, info = our_info):
-    # # use below line to get info in the parameter
-    # match, mismatch, gap = info
+    # use below line to get info in the parameter
+    match, mismatch, gap = info
     n, m = len(A), len(B)
     # B is empty, just make it all gap
     if m == 0:
@@ -96,8 +96,8 @@ def get_alignment(A:str, B:str, info = our_info):
                 best = j
         print(dp1[f1][best] + dp2[f2][best+1])
         # divide into 2 strings
-        ans1 = get_alignment(A[1:mid+1],B[1:best+1])
-        ans2 = get_alignment(A[mid+1:],B[best+1:])
+        ans1 = get_alignment(A[1:mid+1],B[1:best+1],info)
+        ans2 = get_alignment(A[mid+1:],B[best+1:],info)
         alignmentA = ans1[0] + ans2[0]
         alignmentB = ans1[1] + ans2[1]
     
@@ -105,7 +105,7 @@ def get_alignment(A:str, B:str, info = our_info):
     return (alignmentA,alignmentB)
 
 def find_score(alignmentA:str, alignmentB:str, info = our_info) -> int:
-    match, mismatch, indel = info
+    match, mismatch, gap = info
     an, am = len(alignmentA), len(alignmentB)
     if an != am:
         print("This is not an alignment")
@@ -115,7 +115,7 @@ def find_score(alignmentA:str, alignmentB:str, info = our_info) -> int:
         if alignmentA[i] != '-' and alignmentB[i] != '-':
             score += match if alignmentA[i] == alignmentB[i] else mismatch
         else:
-            score += indel
+            score += gap
     return score
 
 if __name__ == "__main__":
@@ -124,5 +124,8 @@ if __name__ == "__main__":
     alignmentA, alignmentB = get_alignment(A,B)
     print(alignmentA)
     print(alignmentB)
+    diff = ""
+    for i in range(len(alignmentA)):
+        diff += "+" if alignmentA[i] == alignmentB[i] else "-"
+    print(diff)
     print(f"Score:{find_score(alignmentA,alignmentB)}")
-    
