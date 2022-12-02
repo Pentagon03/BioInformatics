@@ -94,7 +94,7 @@ def get_alignment(A:str, B:str, info = our_info):
         for j in range(1,m+1):
             if dp1[f1][j] + dp2[f2][j+1] > dp1[f1][best] + dp2[f2][best+1]:
                 best = j
-        print(dp1[f1][best] + dp2[f2][best+1])
+        # print(dp1[f1][best] + dp2[f2][best+1])
         # divide into 2 strings
         ans1 = get_alignment(A[1:mid+1],B[1:best+1],info)
         ans2 = get_alignment(A[mid+1:],B[best+1:],info)
