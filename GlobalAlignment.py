@@ -6,7 +6,7 @@ our_info = [1,-1,-1]
 # match, mismatch, gap = our_info 
 
 # Basically global alignment
-# Note thatt there can be different alginments with same score
+# Note that there can be different alginments with same score
 # get alginment of A and B in linear space
 def get_alignment(A:str, B:str, info = our_info):
     # use below line to get info in the parameter
